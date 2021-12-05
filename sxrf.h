@@ -10,6 +10,7 @@
 #ifndef SXRF_H
 #define SXRF_H
 
+#include <stdint.h>
 #include <stdbool.h>
 
 typedef uint8_t u8;
