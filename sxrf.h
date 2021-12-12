@@ -143,6 +143,7 @@ u8 sxrf_read_byte(const u8 addr);
 void sxrf_write_byte(const u8 addr, u8 val);
 
 u32 sxrf_read_fifo(u32 buff, u32 buff_size);
+SXRF_RET sxrf_clear_fifo();
 
 //
 // Must be implemented by HAL

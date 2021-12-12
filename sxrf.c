@@ -37,7 +37,9 @@ const u8
 	SXRF_SYNC_WORD_ON_MASK = 0b00010000,
 	SXRF_ADDR_FILTERING_MASK = 0b00000110,
 
-	SXRF_DIO0_MAPPING_MASK = 0b11000000
+	SXRF_DIO0_MAPPING_MASK = 0b11000000,
+
+	SXRF_IRQ_FLAGS2_FIFO_OVERRUN_MASK = 0b00010000
 ;
 
 /** Bits for multifunction registers */
@@ -620,6 +622,21 @@ u32 sxrf_read_fifo(u32 buff, u32 buff_size)
 	sxrf_read(0x00, buff, length);
 
 	return length;
+}
+
+/******************************************************************************
+* Clear FIFO.
+* FIFO can be cleared by setting FifoOverrun IRQ flag
+* @return
+*	SXRF_OK on success
+******************************************************************************/
+SXRF_RET sxrf_clear_fifo()
+{
+	// After writing the flag is cleared automatically
+	SXRF_RET ret = sxrf_set_reg_bits(REG_IRQ_FLAGS2, SXRF_IRQ_FLAGS2_FIFO_OVERRUN_MASK, 
+		1 << (SXRF_IRQ_FIFO_OVERRUN - 8));
+
+	return ret;
 }
 
 /******************************************************************************
