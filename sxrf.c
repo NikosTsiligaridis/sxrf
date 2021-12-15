@@ -610,7 +610,7 @@ SXRF_RET sxrf_set_crc_on(bool on)
 * @param buff_size Output buffer size
 * @return Bytes read
 ******************************************************************************/
-u32 sxrf_read_fifo(u32 buff, u32 buff_size)
+u32 sxrf_read_fifo(u8 *buff, u32 buff_size)
 {
 	// First byte is length
 	int length = sxrf_read_byte(0x00);
